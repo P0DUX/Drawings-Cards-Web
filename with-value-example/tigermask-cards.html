@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Masked Tiger Face (Tigermask) with Stats</title>
+  <!-- Bootstrap CSS tramite CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- p5.js tramite CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #FFE4B5, #FFDEAD);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      width: 420px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .card-body {
+      padding: 15px;
+      background: #fff;
+    }
+    #canvas-container {
+      display: flex;
+      justify-content: center;
+    }
+    .stats {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Card per "Masked Tiger Face (Tigermask)" -->
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Masked Tiger Face (Tigermask)</h3>
+    </div>
+    <div class="card-body">
+      <div id="canvas-container"></div>
+      <!-- Sezione Statistiche -->
+      <div class="stats">
+        <ul class="list-group">
+          <li class="list-group-item">Atk: 55</li>
+          <li class="list-group-item">Dif: 40</li>
+          <li class="list-group-item">HP: 130</li>
+          <li class="list-group-item">MP: 70</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setup() {
+      // Crea il canvas e lo inserisce in "canvas-container"
+      const canvas = createCanvas(400, 400);
+      canvas.parent("canvas-container");
+      noLoop(); // Il disegno è statico, viene eseguito una sola volta
+    }
+    
+    function draw() {
+      background(240);
+      
+      // 1. Base umana: faccia rosa (pelle)
+      let skinColor = color("#FFC0CB");
+      noStroke();
+      fill(skinColor);
+      ellipse(200, 200, 220, 260);
+      
+      // 2. Maschera Tigre: colore arancione tipico con angoli arrotondati
+      // Scegliamo un arancione caldo
+      let tigerColor = color(255, 140, 0);
+      fill(tigerColor);
+      rectMode(CENTER);
+      rect(200, 200, 180, 100, 20);
+      
+      // 3. Strisce nere sulla maschera per richiamare il pelo della tigre
+      stroke(0);
+      strokeWeight(3);
+      // Una striscia orizzontale (centrale)
+      line(140, 200, 260, 200);
+      // Due strisce leggermente oblique, una a sinistra e una a destra
+      line(150, 185, 190, 215);
+      line(210, 215, 250, 185);
+      noStroke();
+      
+      // 4. "Ritaglio" per gli occhi: aperture bianche nella maschera
+      fill(255);
+      ellipse(160, 200, 35, 25);  // occhio sinistro
+      ellipse(240, 200, 35, 25);  // occhio destro
+      
+      // Dettagli occhi: pupille nere con riflessi bianchi
+      fill(0);
+      ellipse(160, 200, 15, 15);
+      ellipse(240, 200, 15, 15);
+      fill(255);
+      ellipse(156, 196, 5, 5);
+      ellipse(236, 196, 5, 5);
+      
+      // 5. Orecchie tigre: triangoli attaccati alla parte superiore della maschera
+      fill(tigerColor);
+      // Orecchio sinistro
+      triangle(140, 140, 120, 60, 170, 140);
+      // Orecchio destro (speculare)
+      triangle(260, 140, 280, 60, 230, 140);
+      
+      // Possibile inner ear: una forma più chiara per dettaglio (facoltativo)
+      fill(255, 200);
+      ellipse(140, 140, 40, 40);
+      ellipse(260, 140, 40, 40);
+      
+      // 6. Naso: piccola ellisse nera
+      fill(0);
+      ellipse(200, 240, 20, 14);
+      
+      // 7. Bocca: arco che simboleggia un sorriso
+      noFill();
+      stroke(0);
+      strokeWeight(2);
+      arc(200, 260, 40, 20, 0, PI);
+      noStroke();
+      
+      // 8. Finitura: bordo sottile per definire la maschera
+      stroke(0);
+      strokeWeight(1);
+      noFill();
+      rectMode(CENTER);
+      rect(200, 200, 180, 100, 20);
+      noStroke();
+    }
+  </script>
+  
+  <!-- Bootstrap Bundle JS (opzionale per componenti interattivi) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
