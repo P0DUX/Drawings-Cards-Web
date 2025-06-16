@@ -1,0 +1,25 @@
+[
+  {
+    "id": "mandog",
+    "name": "Mandog",
+    "type": "Dog Mask",
+    "Atk": 45,
+    "Dif": 30,
+    "HP": 120,
+    "MP": 40,
+    "description": "Un ibrido tra umano e cane, mascherato in stile da lottatore.",
+    "img": "mandog.png"
+  },
+  {
+    "id": "batman",
+    "name": "Bat Mask",
+    "type": "Bat Face",
+    "Atk": 50,
+    "Dif": 35,
+    "HP": 100,
+    "MP": 60,
+    "description": "Maschera da pipistrello dal tono oscuro ed inquietante.",
+    "img": "batman.png"
+  }
+  // aggiungi altre card se necessario…
+]
