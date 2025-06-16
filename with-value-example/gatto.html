@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Enhanced Cat Drawing with p5.js</title>
+  <!-- Inclusione di p5.js tramite CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      /* Sfondo con gradient per dare un po' di colore */
+      background: linear-gradient(120deg, #f6d365, #fda085);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function setup() {
+      createCanvas(400, 400);
+      noLoop(); // disegna solo una volta, questo renderizza il disegno statico
+    }
+
+    function draw() {
+      // Disegno del corpo del gatto
+      noStroke();
+      fill(180);
+      ellipse(200, 270, 130, 90);
+
+      // Disegno della coda con curve Bezier
+      beginShape();
+        vertex(260, 270);
+        bezierVertex(290, 250, 320, 290, 280, 320);
+        bezierVertex(270, 330, 250, 320, 260, 270);
+      endShape(CLOSE);
+
+      // Disegno della testa
+      fill(180);
+      ellipse(200, 180, 100, 100);
+
+      // Orecchie con forma migliorata
+      fill(180);
+      // Orecchio sinistro
+      triangle(155, 140, 175, 80, 195, 140);
+      // Orecchio destro
+      triangle(205, 140, 225, 80, 245, 140);
+
+      // Interno delle orecchie (colore rosa chiaro)
+      fill(255, 182, 193);
+      // Interno orecchio sinistro
+      triangle(165, 130, 175, 95, 185, 130);
+      // Interno orecchio destro
+      triangle(215, 130, 225, 95, 235, 130);
+
+      // Occhi con dettagli (il bianco, il pupilla nera e un piccolo riflesso)
+      // Occhio sinistro
+      fill(255);
+      ellipse(180, 175, 25, 15);
+      fill(0);
+      ellipse(180, 175, 12, 12);
+      fill(255);
+      ellipse(176, 170, 5, 5);
+      // Occhio destro
+      fill(255);
+      ellipse(220, 175, 25, 15);
+      fill(0);
+      ellipse(220, 175, 12, 12);
+      fill(255);
+      ellipse(216, 170, 5, 5);
+
+      // Naso: piccolo triangolo rosa acceso
+      fill(255, 105, 180);
+      triangle(200, 185, 195, 195, 205, 195);
+
+      // Bocca: due archi per simulare un sorriso
+      noFill();
+      stroke(0);
+      strokeWeight(1);
+      arc(195, 200, 10, 10, 0, PI);
+      arc(205, 200, 10, 10, 0, PI);
+
+      // Baffi: linee disegnate simmetricamente da entrambi i lati
+      strokeWeight(1);
+      // Baffi sinistri
+      line(165, 195, 125, 190);
+      line(165, 200, 125, 200);
+      line(165, 205, 125, 210);
+      // Baffi destri
+      line(235, 195, 275, 190);
+      line(235, 200, 275, 200);
+      line(235, 205, 275, 210);
+    }
+  </script>
+</body>
+</html>
