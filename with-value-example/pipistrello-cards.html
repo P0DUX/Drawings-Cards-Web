@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Bat Face Drawing in a Card with p5.js</title>
+  <!-- Bootstrap CSS tramite CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Inclusione di p5.js tramite CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #333, #555);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      width: 420px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .card-body {
+      padding: 15px;
+      background: #f0f0f0;
+    }
+    #canvas-container {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Bat Face</h3>
+    </div>
+    <div class="card-body">
+      <div id="canvas-container"></div>
+    </div>
+  </div>
+  
+  <script>
+    function setup() {
+      const canvas = createCanvas(400, 400);
+      canvas.parent("canvas-container");
+      noLoop(); // Disegno statico, eseguito una sola volta
+    }
+    
+    function draw() {
+      background(240);
+      
+      // Imposta il colore base per il pipistrello (quasi nero)
+      let batColor = color(20, 20, 20);
+      noStroke();
+      
+      // 1. Testa
+      // Disegno della testa come un'ellisse centrata a (200,200) con larghezza 200 e altezza 220.
+      fill(batColor);
+      ellipse(200, 200, 200, 220);
+      
+      // 2. Orecchie (attachate alla testa)
+      // Per garantire un attacco perfetto, la base delle orecchie coincide con il bordo superiore dell'ellisse (y = 90, 
+      // perché 200 - 110 = 90)
+      // Orecchio sinistro: base dal punto (170,90) a (190,90) con vertice d'apice a (180,40)
+      triangle(170, 90, 190, 90, 180, 40);
+      // Orecchio destro: simile, ma speculare
+      triangle(210, 90, 230, 90, 220, 40);
+      
+      // 3. Occhi
+      // Occhio sinistro
+      fill(255);
+      ellipse(170, 180, 30, 20);
+      fill(0);
+      ellipse(170, 180, 12, 12);
+      fill(255);
+      ellipse(166, 176, 5, 5);
+      // Occhio destro
+      fill(255);
+      ellipse(230, 180, 30, 20);
+      fill(0);
+      ellipse(230, 180, 12, 12);
+      fill(255);
+      ellipse(226, 176, 5, 5);
+      
+      // 4. Naso
+      // Il naso è disegnato interamente in nero per eliminare tonalità rosa indesiderate.
+      fill(0);
+      ellipse(200, 230, 20, 14);
+      
+      // 5. Bocca
+      noFill();
+      stroke(0);
+      strokeWeight(2);
+      arc(200, 245, 40, 20, 0, PI);
+      noStroke();
+    }
+  </script>
+  
+  <!-- Bootstrap Bundle JS (opzionale per componenti interattivi) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
