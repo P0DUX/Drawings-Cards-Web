@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Dettagli Card</title>
+  <!-- Includi eventualmente Bootstrap per lo stile -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 20px; }
+    .card-container { max-width: 500px; margin: auto; }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header" id="card-title"></div>
+      <div class="card-body">
+        <p id="card-desc"></p>
+        <ul class="list-group">
+          <li class="list-group-item">Atk: <span id="card-atk"></span></li>
+          <li class="list-group-item">Dif: <span id="card-dif"></span></li>
+          <li class="list-group-item">HP: <span id="card-hp"></span></li>
+          <li class="list-group-item">MP: <span id="card-mp"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Funzione per ottenere il parametro dalla query string
+    function getQueryParam(param) {
+      let params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+
+    // Carica il file cards.json e popola la pagina con i dati della card
+    async function loadCard() {
+      const cardId = getQueryParam('id');
+      if (!cardId) {
+        document.getElementById('card-title').innerText = "Nessuna card selezionata";
+        return;
+      }
+      
+      try {
+        const response = await fetch('cards.json');
+        const cards = await response.json();
+        const card = cards.find(c => c.id === cardId);
+        
+        if (card) {
+          document.getElementById('card-title').innerText = card.name;
+          document.getElementById('card-desc').innerText = card.description;
+          document.getElementById('card-atk').innerText = card.Atk;
+          document.getElementById('card-dif').innerText = card.Dif;
+          document.getElementById('card-hp').innerText = card.HP;
+          document.getElementById('card-mp').innerText = card.MP;
+        } else {
+          document.getElementById('card-title').innerText = "Card non trovata";
+        }
+      } catch (error) {
+        console.error("Errore nel caricamento dei dati:", error);
+      }
+    }
+    
+    loadCard();
+  </script>
+</body>
+</html>
