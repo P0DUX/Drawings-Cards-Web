@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Dog Face Drawing in a Card with p5.js</title>
+  <!-- Bootstrap CSS tramite CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Inclusione di p5.js tramite CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      width: 420px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .card-body {
+      padding: 15px;
+    }
+    #canvas-container {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Dog Face</h3>
+    </div>
+    <div class="card-body">
+      <div id="canvas-container"></div>
+    </div>
+  </div>
+
+  <script>
+    function setup() {
+      // Creazione del canvas e inserimento nel contenitore con id "canvas-container"
+      const canvas = createCanvas(400, 400);
+      canvas.parent("canvas-container");
+      noLoop(); // Esegue il disegno una sola volta
+    }
+
+    function draw() {
+      background(240);
+
+      // Impostazione della palette: colore base (tono marrone) per il viso del cane
+      let baseColor = color(160, 120, 80);
+      noStroke();
+      
+      // --------------------------------------
+      // 1. Testa (volto) del cane
+      // --------------------------------------
+      fill(baseColor);
+      // Disegno della testa: un'ellisse centrata a (200,200)
+      // Larghezza 200 e altezza 220 per dare una forma allungata e naturale
+      ellipse(200, 200, 200, 220);
+
+      // --------------------------------------
+      // 2. Orecchie (sinistra e destra)
+      // --------------------------------------
+      // Orecchio sinistro
+      beginShape();
+        vertex(120, 140);                           // Punto di partenza
+        bezierVertex(90, 90, 130, 40, 170, 80);       // Curva verso l'alto
+        vertex(170, 130);                           // Ritorno verso la testa
+        bezierVertex(150, 120, 130, 130, 120, 140);    // Chiusura morbida
+      endShape(CLOSE);
+      // Orecchio destro (speculare)
+      beginShape();
+        vertex(280, 140);
+        bezierVertex(310, 90, 270, 40, 230, 80);
+        vertex(230, 130);
+        bezierVertex(250, 120, 270, 130, 280, 140);
+      endShape(CLOSE);
+      
+      // --------------------------------------
+      // 3. Occhi
+      // --------------------------------------
+      // Occhio sinistro
+      fill(255);
+      ellipse(160, 180, 30, 20);  // Base bianca
+      fill(0);
+      ellipse(160, 180, 12, 12);  // Pupilla
+      fill(255);
+      ellipse(155, 175, 5, 5);    // Riflesso per dare vitalità
+      // Occhio destro
+      fill(255);
+      ellipse(240, 180, 30, 20);
+      fill(0);
+      ellipse(240, 180, 12, 12);
+      fill(255);
+      ellipse(235, 175, 5, 5);
+
+      // --------------------------------------
+      // 4. Naso
+      // --------------------------------------
+      fill(0);
+      // Il naso è disegnato come una piccola ellisse centrata a (200,230)
+      ellipse(200, 230, 20, 14);
+
+      // --------------------------------------
+      // 5. Bocca
+      // --------------------------------------
+      noFill();
+      stroke(0);
+      strokeWeight(2);
+      // Disegna un arco per simulare un sorriso, centrato sotto il naso
+      arc(200, 245, 40, 20, 0, PI);
+      // Termina senza ulteriore tratto (rimuovendo stroke per eventuali altri elementi)
+      noStroke();
+    }
+  </script>
+
+  <!-- Bootstrap Bundle JS (opzionale) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
