@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Masked Crocodile Face (Crocmask) with Stats</title>
+  <!-- Bootstrap CSS tramite CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- p5.js tramite CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      /* Un gradiente che richiama i colori di una palude */
+      background: linear-gradient(120deg, #557A46, #7E9E65);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      width: 420px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .card-body {
+      padding: 15px;
+      background: #fff;
+    }
+    #canvas-container {
+      display: flex;
+      justify-content: center;
+    }
+    .stats {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Card per "Masked Crocodile Face (Crocmask)" -->
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Masked Crocodile Face (Crocmask)</h3>
+    </div>
+    <div class="card-body">
+      <div id="canvas-container"></div>
+      <!-- Sezione Statistiche -->
+      <div class="stats">
+        <ul class="list-group">
+          <li class="list-group-item">Atk: 85</li>
+          <li class="list-group-item">Dif: 60</li>
+          <li class="list-group-item">HP: 155</li>
+          <li class="list-group-item">MP: 30</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setup() {
+      // Crea il canvas e lo inserisce nel container "canvas-container"
+      const canvas = createCanvas(400, 400);
+      canvas.parent("canvas-container");
+      noLoop(); // Il disegno è statico
+    }
+    
+    function draw() {
+      background(240);
+      
+      // 1. Base Umana: faccia rosa
+      let skinColor = color("#FFC0CB");
+      noStroke();
+      fill(skinColor);
+      ellipse(200, 200, 220, 260);
+      
+      // 2. Maschera Crocmask:
+      // Utilizziamo un colore verde-oliva tipico per il coccodrillo.
+      let crocColor = color(60, 100, 50);
+      fill(crocColor);
+      rectMode(CENTER);
+      // Disegniamo la parte superiore della maschera che copre gli occhi:
+      rect(200, 190, 180, 100, 20);
+      
+      // 3. Aperture per gli occhi:
+      fill(255);
+      ellipse(160, 190, 35, 25);  // occhio sinistro
+      ellipse(240, 190, 35, 25);  // occhio destro
+      
+      fill(0);
+      ellipse(160, 190, 15, 15);  // pupilla sinistra
+      ellipse(240, 190, 15, 15);  // pupilla destra
+      
+      fill(255);
+      ellipse(156, 186, 5, 5);    // riflesso sinistro
+      ellipse(236, 186, 5, 5);    // riflesso destro
+      
+      // 4. Snout (tratto caratteristico del coccodrillo)
+      // Disegno una forma che sporge dalla parte inferiore della maschera per simulare il muso
+      fill(crocColor);
+      beginShape();
+        vertex(140, 240);
+        vertex(260, 240);
+        vertex(250, 270);
+        vertex(200, 290);
+        vertex(150, 270);
+      endShape(CLOSE);
+      
+      // 5. Denti "dentellati" lungo il bordo del muso
+      fill(255);
+      let numTeeth = 6;
+      let startX = 150, endX = 250;
+      let toothWidth = (endX - startX) / numTeeth;
+      let toothHeight = 15;
+      for (let i = 0; i < numTeeth; i++) {
+        let x1 = startX + i * toothWidth;
+        let x2 = x1 + toothWidth;
+        let xm = (x1 + x2) / 2;
+        // I denti sporgono verso il basso dalla base del muso a y = 270
+        triangle(x1, 270, x2, 270, xm, 270 + toothHeight);
+      }
+      
+      // 6. Naso:
+      fill(0);
+      ellipse(200, 245, 20, 14);
+      
+      // 7. Bocca:
+      noFill();
+      stroke(0);
+      strokeWeight(2);
+      arc(200, 265, 40, 20, 0, PI);
+      noStroke();
+      
+      // 8. Finitura: bordo sottile per definire la maschera (sia per la parte superiore che per il muso)
+      stroke(0);
+      strokeWeight(1);
+      noFill();
+      rectMode(CENTER);
+      rect(200, 190, 180, 100, 20);
+      // Bordo intorno al muso – disegnato con una linea:
+      line(140, 240, 260, 240);
+      noStroke();
+    }
+  </script>
+  
+  <!-- Bootstrap Bundle JS (opzionale per componenti interattivi) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
